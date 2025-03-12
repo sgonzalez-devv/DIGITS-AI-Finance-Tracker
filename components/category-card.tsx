@@ -1,56 +1,73 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Edit, Trash2, AlertCircle } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Edit, Trash2, AlertCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { Badge } from "@/components/ui/badge"
-import { getCategoryIcon } from "@/lib/icons"
+} from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
+import { getCategoryIcon } from "@/lib/icons";
 
 interface CategoryCardProps {
   category: {
-    id: number
-    name: string
-    icon: string
-    color: string
-    type: "expense" | "income"
-    isDefault: boolean
-  }
-  onEdit: () => void
-  onDelete?: () => void
+    id: number;
+    name: string;
+    icon: string;
+    color: string;
+    type: "expense" | "income";
+    isDefault: boolean;
+  };
+  onEdit: () => void;
+  onDelete?: () => void;
 }
 
-export default function CategoryCard({ category, onEdit, onDelete }: CategoryCardProps) {
-  const Icon = getCategoryIcon(category.icon)
+export default function CategoryCard({
+  category,
+  onEdit,
+  onDelete,
+}: CategoryCardProps) {
+  const Icon = getCategoryIcon(category.icon);
 
   const colorClasses = {
     blue: "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
-    green: "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+    green:
+      "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
     red: "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400",
-    amber: "bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400",
-    purple: "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
+    amber:
+      "bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400",
+    purple:
+      "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
     pink: "bg-pink-100 text-pink-600 dark:bg-pink-900/30 dark:text-pink-400",
-    indigo: "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400",
-  }
+    indigo:
+      "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400",
+  };
 
   const typeClasses = {
     expense: "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400",
-    income: "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
-  }
+    income:
+      "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+  };
 
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-0">
         <div className="flex items-center p-4">
           <div
-            className={`p-3 rounded-full mr-4 ${colorClasses[category.color as keyof typeof colorClasses] || colorClasses.blue}`}
+            className={`p-3 rounded-full mr-4 ${
+              colorClasses[category.color as keyof typeof colorClasses] ||
+              colorClasses.blue
+            }`}
           >
             <Icon className="h-5 w-5" />
           </div>
@@ -72,7 +89,10 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
                 </TooltipProvider>
               )}
             </div>
-            <Badge variant="outline" className={`mt-1 ${typeClasses[category.type]}`}>
+            <Badge
+              variant="outline"
+              className={`mt-1 ${typeClasses[category.type]}`}
+            >
               {category.type.charAt(0).toUpperCase() + category.type.slice(1)}
             </Badge>
           </div>
@@ -119,6 +139,5 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
-

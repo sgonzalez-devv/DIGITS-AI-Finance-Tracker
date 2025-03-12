@@ -11,8 +11,18 @@ import CategoryCard from "@/components/category-card";
 import AddCategoryDialog from "@/components/add-category-dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+interface Category {
+  id: number;
+  name: string;
+  icon: string;
+  color: string;
+  type: "expense" | "income"; // Restrict the type to valid values
+  isDefault: boolean;
+}
+
+
 // Sample categories data
-const defaultCategories = [
+const defaultCategories: Category[] = [
   {
     id: 1,
     name: "Housing",
@@ -87,7 +97,7 @@ const defaultCategories = [
   },
 ];
 
-const customCategories = [
+const customCategories: Category[] = [
   {
     id: 10,
     name: "Dog Expenses",
@@ -107,7 +117,7 @@ const customCategories = [
 ];
 
 export default function CategoriesPage() {
-  const [categories, setCategories] = useState([
+  const [categories, setCategories] = useState<Category[]>([
     ...defaultCategories,
     ...customCategories,
   ]);
@@ -116,7 +126,7 @@ export default function CategoriesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("all");
 
-  const handleAddCategory = (newCategory: any) => {
+  const handleAddCategory = (newCategory: Category) => {
     if (editingCategory) {
       // Update existing category
       setCategories(
@@ -136,7 +146,7 @@ export default function CategoriesPage() {
     setShowAddCategory(false);
   };
 
-  const handleEditCategory = (category: any) => {
+  const handleEditCategory = (category: Category) => {
     setEditingCategory(category);
     setShowAddCategory(true);
   };
